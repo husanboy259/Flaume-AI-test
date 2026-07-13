@@ -1,0 +1,1 @@
+import"./mockData-CmcJoebu.js";import{G as a}from"./vendor-genai-BXiNCG5B.js";const s={chat:async(n,e)=>{var t;const o="KEY-REMOVED-USE-BACKEND",r=new a({apiKey:o});if((t=e==null?void 0:e.signal)!=null&&t.aborted)throw new DOMException("Aborted","AbortError");return(await r.models.generateContent({model:"gemini-2.5-flash",contents:n})).text||""}},m=s;export{m as a};

@@ -1,0 +1,1 @@
+import{a as e}from"./index-EB9ew6gk.js";const d=e(o=>({toasts:[],addToast:a=>{const s=Math.random().toString(36).substring(2,9);o(t=>({toasts:[...t.toasts,{...a,id:s}]})),setTimeout(()=>{o(t=>({toasts:t.toasts.filter(r=>r.id!==s)}))},5e3)},removeToast:a=>o(s=>({toasts:s.toasts.filter(t=>t.id!==a)}))}));export{d as u};

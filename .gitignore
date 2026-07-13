@@ -1,0 +1,13 @@
+# dependencies - reinstalled with npm install, never committed
+node_modules/
+
+# secrets - NEVER commit these
+.env
+.env.*
+
+# local database - contains user data
+*.db
+*.db-journal
+
+# graphify caches
+graphify-out/cache/

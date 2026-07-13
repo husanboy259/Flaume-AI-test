@@ -1,0 +1,62 @@
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String         @unique
+  passwordHash  String
+  plan          String         @default("Free")
+  avatar        String?
+  conversations Conversation[]
+  files         File[]
+  voiceSessions VoiceSession[]
+  createdAt     DateTime       @default(now())
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  title     String
+  isPinned  Boolean   @default(false)
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  role           String       // "user" or "ai"
+  content        String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId String
+  createdAt      DateTime     @default(now())
+}
+
+model File {
+  id        String   @id @default(cuid())
+  name      String
+  size      Int
+  type      String
+  path      String
+  status    String   @default("processing") // uploading | processing | completed | failed
+  ocrText   String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+}
+
+model VoiceSession {
+  id         String   @id @default(cuid())
+  transcript String
+  response   String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  createdAt  DateTime @default(now())
+}
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
