@@ -19,6 +19,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:4173",
   process.env.FRONTEND_URL, // your Vercel site, set on Render
+  /^https:\/\/flaume-ai-test[a-z0-9-]*\.vercel\.app$/, // every address of your Vercel project
 ].filter(Boolean);
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
